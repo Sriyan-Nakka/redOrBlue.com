@@ -1,2 +1,2 @@
-# redOrBlue.com
+# Red Or Blue
 A game of Trust...
