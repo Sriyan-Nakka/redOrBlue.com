@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Sai Sriyan" />
+    <meta name="description" content="A game of trust" />
+    <link
+      rel="shortcut icon"
+      href="https://res.cloudinary.com/dhhmanp00/image/upload/v1725259983/ettcwuy5m30epwblhm3p.png"
+    />
+    <title>Red or Blue</title>
+    <style>
+      :root {
+        --red: hsl(355, 97%, 54%);
+        --blue: hsl(202, 90%, 54%);
+        --beige: hsl(71, 53%, 87%);
+        --black2: #272727;
+      }
+      @font-face {
+        font-family: "headFont";
+        src: url("https://res.cloudinary.com/dhhmanp00/raw/upload/v1725791399/introrustg-base2line-webfont_nmugcb.woff2")
+          format("woff2");
+      }
+      @font-face {
+        font-family: "bodyFont";
+        src: url("https://res.cloudinary.com/dhhmanp00/raw/upload/v1725791839/nerkoone-regular-webfont_l8xfes.woff2")
+          format("woff2");
+      }
+      .icon {
+        width: 40px;
+      }
+      body {
+        font-size: 62.5%;
+        background-color: black;
+        color: var(--beige);
+        font-size: 1.6rem;
+        font-family: "bodyFont", sans-serif;
+      }
+      footer {
+        font-size: 1.3rem;
+      }
+      .redText {
+        color: var(--red);
+        text-decoration: underline;
+        font-family: "headFont", sans-serif;
+      }
+      .blueText {
+        color: var(--blue);
+        text-decoration: underline;
+        font-family: "headFont", sans-serif;
+      }
+      #redButton {
+        background-color: var(--red);
+        width: 150px;
+        height: 150px;
+      }
+      #blueButton {
+        background-color: var(--blue);
+        width: 150px;
+        height: 150px;
+      }
+      #redButton,
+      #blueButton {
+        border: none;
+        border-radius: 15px;
+      }
+      .miniText {
+        font-size: 2.2rem;
+      }
+      #letterSelector,
+      #numberSelectorA,
+      #numberSelectorB,
+      #numberSelectorC,
+      #A1Round1,
+      #A1Round2,
+      #A1Round3,
+      #A2Round1,
+      #A2Round2,
+      #A2Round3,
+      #A3Round1,
+      #A3Round2,
+      #A3Round3,
+      #B1Round1,
+      #B1Round2,
+      #B1Round3,
+      #B2Round1,
+      #B2Round2,
+      #B2Round3,
+      #B3Round1,
+      #B3Round2,
+      #B3Round3,
+      #C1Round1,
+      #C1Round2,
+      #C1Round3,
+      #C2Round1,
+      #C2Round2,
+      #C2Round3,
+      #C3Round1,
+      #C3Round2,
+      #C3Round3,
+      #nextRoundButton {
+        display: none;
+      }
+      button {
+        font-size: 1.6rem;
+        border-radius: 5px;
+        border: none;
+      }
+      button:hover {
+        cursor: pointer;
+      }
+      details {
+        background-color: var(--black2);
+        border-radius: 20px;
+      }
+      a {
+        color: lightseagreen;
+      }
+      #roundNumber {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+      #howToPlayMenu {
+        width: 96%;
+      }
+      #mainHeading {
+        font-weight: bold;
+        font-size: 3.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <header>
+        <span id="mainHeading">
+          <span class="redText">Red</span> or
+          <span class="blueText">Blue</span></span
+        >
+        <br />
+        <span class="miniText">A game of Trust</span> <br />
+        <br />
+        <details id="howToPlayMenu">
+          <summary>How to play</summary>
+          <br />
+          This game is to be played with a friend. You should guess red or blue,
+          your friend can tell you the truth or lie about the correct answer
+          (answers are in the Docs file given at the end of this guide).
+          <br /><br />
+          There are a total of 3 rounds to guess. Guess them all to win! Good
+          luck. <br /><br />
+          Key file:
+          <a
+            href="https://docs.google.com/document/d/1-DTN5Vio14iXdjr-WvpIYhLTA4x-eWPm-RJi1mKiQ2U/edit?usp=sharing"
+            target="_blank"
+            >Click here</a
+          >
+        </details>
+      </header>
+      <hr />
+      <main>
+        <p id="result"></p>
+        <button id="playGame" onclick="playFunction()">Play</button><br />
+        <section id="letterSelector">
+          Select a letter: <br />
+          <button id="buttonA" onclick="A_function()">A</button>
+          <button id="buttonB" onclick="B_function()">B</button>
+          <button id="buttonC" onclick="C_function()">C</button>
+        </section>
+        <section id="numberSelectorA">
+          Select a number: <br />
+          <button id="buttonA1" onclick="A1_function()">1</button>
+          <button id="buttonA2" onclick="A2_function()">2</button>
+          <button id="buttonA3" onclick="A3_function()">3</button>
+        </section>
+        <section id="numberSelectorB">
+          Select a number: <br />
+          <button id="buttonB1" onclick="B1_function()">1</button>
+          <button id="buttonB2" onclick="B2_function()">2</button>
+          <button id="buttonB3" onclick="B3_function()">3</button>
+        </section>
+        <section id="numberSelectorC">
+          Select a number: <br />
+          <button id="buttonC1" onclick="C1_function()">1</button>
+          <button id="buttonC2" onclick="C2_function()">2</button>
+          <button id="buttonC3" onclick="C3_function()">3</button>
+        </section>
+        <br />
+        <div id="divA1">
+          <div id="A1Round1">
+            <p id="roundNumber">Round: 1</p>
+            <button id="redButton" onclick="wrongFunction()"></button>
+            <button id="blueButton" onclick="A1R1CorrectFunction()"></button>
+            <p id="resultA1R1"></p>
+            <button id="nextRoundButton">Next Round</button>
+          </div>
+          <div id="A1Round2">
+            <p id="roundNumber">Round: 2</p>
+            <button id="redButton" onclick="A1R2CorrectFunction()"></button>
+            <button id="blueButton" onclick="wrongFunction()"></button>
+            <p id="resultA1R2"></p>
+            <button id="nextRoundButton">Next Round</button>
+          </div>
+          <div id="A1Round3">
+            <p id="roundNumber">Round: 3</p>
+            <button id="redButton" onclick="wrongFunction()"></button>
+            <button id="blueButton" onclick="A1R3CorrectFunction()"></button>
+            <p id="resultA1R3"></p>
+          </div>
+        </div>
+
+        <div id="divA2">
+          <div id="A2Round1">
+            <p id="roundNumber">Round: 1</p>
+            <button id="redButton" onclick="wrongFunction()"></button>
+            <button id="blueButton" onclick="A2R1CorrectFunction()"></button>
+            <p id="resultA2R1"></p>
+          </div>
+          <div id="A2Round2">
+            <p id="roundNumber">Round: 2</p>
+            <button id="redButton" onclick="wrongFunction()"></button>
+            <button id="blueButton" onclick="A2R2CorrectFunction()"></button>
+            <p id="resultA2R2"></p>
+          </div>
+          <div id="A2Round3">
+            <p id="roundNumber">Round: 3</p>
+            <button id="redButton" onclick="A2R3CorrectFunction()"></button>
+            <button id="blueButton" onclick="wrongFunction()"></button>
+            <p id="resultA2R3"></p>
+          </div>
+        </div>
+
+        <div id="divA3">
+          <div id="A3Round1">
+            <p id="roundNumber">Round: 1</p>
+            <button id="redButton" onclick="A3R1CorrectFunction()"></button>
+            <button id="blueButton" onclick="wrongFunction()"></button>
+            <p id="resultA3R1"></p>
+          </div>
+          <div id="A3Round2">
+            <p id="roundNumber">Round: 2</p>
+            <button id="redButton" onclick="A3R2CorrectFunction()"></button>
+            <button id="blueButton" onclick="wrongFunction()"></button>
+            <p id="resultA3R2"></p>
+          </div>
+          <div id="A3Round3">
+            <p id="roundNumber">Round: 3</p>
+            <button id="redButton" onclick="wrongFunction()"></button>
+            <button id="blueButton" onclick="A3R3CorrectFunction()"></button>
+            <p id="resultA3R3"></p>
+          </div>
+        </div>
+
+        <div id="divB1">
+          <div id="B1Round1">
+            <p id="roundNumber">Round: 1</p>
+            <button id="redButton" onclick="wrongFunction()"></button>
+            <button id="blueButton" onclick="B1R1CorrectFunction()"></button>
+            <p id="resultB1R1"></p>
+          </div>
+          <div id="B1Round2">
+            <p id="roundNumber">Round: 2</p>
+            <button id="redButton" onclick="wrongFunction()"></button>
+            <button id="blueButton" onclick="B1R2CorrectFunction()"></button>
+            <p id="resultB1R2"></p>
+          </div>
+          <div id="B1Round3">
+            <p id="roundNumber">Round: 3</p>
+            <button id="redButton" onclick="wrongFunction()"></button>
+            <button id="blueButton" onclick="B1R3CorrectFunction()"></button>
+            <p id="resultB1R3"></p>
+          </div>
+        </div>
+
+        <div id="divB2">
+          <div id="B2Round1">
+            <p id="roundNumber">Round: 1</p>
+            <button id="redButton" onclick="B2R1CorrectFunction()"></button>
+            <button id="blueButton" onclick="wrongFunction()"></button>
+            <p id="resultB2R1"></p>
+          </div>
+          <div id="B2Round2">
+            <p id="roundNumber">Round: 2</p>
+            <button id="redButton" onclick="wrongFunction()"></button>
+            <button id="blueButton" onclick="B2R2CorrectFunction()"></button>
+            <p id="resultB2R2"></p>
+          </div>
+          <div id="B2Round3">
+            <p id="roundNumber">Round: 3</p>
+            <button id="redButton" onclick="B2R3CorrectFunction()"></button>
+            <button id="blueButton" onclick="wrongFunction()"></button>
+            <p id="resultB2R3"></p>
+          </div>
+        </div>
+
+        <div id="divB3">
+          <div id="B3Round1">
+            <p id="roundNumber">Round: 1</p>
+            <button id="redButton" onclick="B3R1CorrectFunction()"></button>
+            <button id="blueButton" onclick="wrongFunction()"></button>
+            <p id="resultB3R1"></p>
+          </div>
+          <div id="B3Round2">
+            <p id="roundNumber">Round: 2</p>
+            <button id="redButton" onclick="B3R2CorrectFunction()"></button>
+            <button id="blueButton" onclick="wrongFunction()"></button>
+            <p id="resultB3R2"></p>
+          </div>
+          <div id="B3Round3">
+            <p id="roundNumber">Round: 3</p>
+            <button id="redButton" onclick="B3R3CorrectFunction()"></button>
+            <button id="blueButton" onclick="wrongFunction()"></button>
+            <p id="resultB3R3"></p>
+          </div>
+        </div>
+
+        <div id="divC1">
+          <div id="C1Round1">
+            <p id="roundNumber">Round: 1</p>
+            <button id="redButton" onclick="wrongFunction()"></button>
+            <button id="blueButton" onclick="C1R1CorrectFunction()"></button>
+            <p id="resultC1R1"></p>
+          </div>
+          <div id="C1Round2">
+            <p id="roundNumber">Round: 2</p>
+            <button id="redButton" onclick="wrongFunction()"></button>
+            <button id="blueButton" onclick="C1R2CorrectFunction()"></button>
+            <p id="resultC1R2"></p>
+          </div>
+          <div id="C1Round3">
+            <p id="roundNumber">Round: 3</p>
+            <button id="redButton" onclick="C1R3CorrectFunction()"></button>
+            <button id="blueButton" onclick="wrongFunction()"></button>
+            <p id="resultC1R3"></p>
+          </div>
+        </div>
+
+        <div id="divC2">
+          <div id="C2Round1">
+            <p id="roundNumber">Round: 1</p>
+            <button id="redButton" onclick="wrongFunction()"></button>
+            <button id="blueButton" onclick="C2R1CorrectFunction()"></button>
+            <p id="resultC2R1"></p>
+          </div>
+          <div id="C2Round2">
+            <p id="roundNumber">Round: 2</p>
+            <button id="redButton" onclick="C2R2CorrectFunction()"></button>
+            <button id="blueButton" onclick="wrongFunction()"></button>
+            <p id="resultC2R2"></p>
+          </div>
+          <div id="C2Round3">
+            <p id="roundNumber">Round: 3</p>
+            <button id="redButton" onclick="C2R3CorrectFunction()"></button>
+            <button id="blueButton" onclick="wrongFunction()"></button>
+            <p id="resultC2R3"></p>
+          </div>
+        </div>
+
+        <div id="divC3">
+          <div id="C3Round1">
+            <p id="roundNumber">Round: 1</p>
+            <button id="redButton" onclick="C3R1CorrectFunction()"></button>
+            <button id="blueButton" onclick="wrongFunction()"></button>
+            <p id="resultC3R1"></p>
+          </div>
+          <div id="C3Round2">
+            <p id="roundNumber">Round: 2</p>
+            <button id="redButton" onclick="wrongFunction()"></button>
+            <button id="blueButton" onclick="C3R2CorrectFunction()"></button>
+            <p id="resultC3R2"></p>
+          </div>
+          <div id="C3Round3">
+            <p id="roundNumber">Round: 3</p>
+            <button id="redButton" onclick="wrongFunction()"></button>
+            <button id="blueButton" onclick="C3R3CorrectFunction()"></button>
+            <p id="resultC3R3"></p>
+          </div>
+        </div>
+      </main>
+    </center>
+    <hr />
+
+    <footer>
+      <center>
+        <a href="https://github.com/Sriyan-Nakka" target="_blank"
+          ><svg
+            class="icon github"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="white"
+              d="M12 1A10.89 10.89 0 0 0 1 11.77A10.79 10.79 0 0 0 8.52 22c.55.1.75-.23.75-.52v-1.83c-3.06.65-3.71-1.44-3.71-1.44a2.86 2.86 0 0 0-1.22-1.58c-1-.66.08-.65.08-.65a2.31 2.31 0 0 1 1.68 1.11a2.37 2.37 0 0 0 3.2.89a2.33 2.33 0 0 1 .7-1.44c-2.44-.27-5-1.19-5-5.32a4.15 4.15 0 0 1 1.11-2.91a3.78 3.78 0 0 1 .11-2.84s.93-.29 3 1.1a10.7 10.7 0 0 1 5.5 0c2.1-1.39 3-1.1 3-1.1a3.78 3.78 0 0 1 .11 2.84A4.15 4.15 0 0 1 19 11.2c0 4.14-2.58 5.05-5 5.32a2.5 2.5 0 0 1 .75 2v2.95c0 .35.2.63.75.52A10.8 10.8 0 0 0 23 11.77A10.89 10.89 0 0 0 12 1"
+            /></svg
+        ></a>
+        <a href="https://sriyan-blogs.blogspot.com/"
+          ><svg
+            class="icon blogger"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 32 32"
+          >
+            <path
+              fill="white"
+              d="M13 7a6 6 0 0 0-6 6v7a6 6 0 0 0 6 6h7a6 6 0 0 0 6-6v-5a1 1 0 0 0-1-1h-1a1 1 0 0 1-1-1a6 6 0 0 0-6-6zm0 5h4c.55 0 1 .45 1 1s-.45 1-1 1h-4c-.55 0-1-.45-1-1s.45-1 1-1m0 7h7c.55 0 1 .45 1 1s-.45 1-1 1h-7c-.55 0-1-.45-1-1s.45-1 1-1"
+            /></svg
+        ></a>
+        <br />
+        &copy;Copyright, Sai Sriyan Nakka 2024, All Rights Reserved.
+        <br />Version 1.5
+      </center>
+    </footer>
+    <script>
+      let result = document.querySelector("#result");
+
+      function playFunction() {
+        document.querySelector("#playGame").style.display = "none";
+        document.querySelector("#howToPlayMenu").style.display = "none";
+        result.textContent = "";
+        document.querySelector("#letterSelector").style.display = "block";
+      }
+      function A_function() {
+        document.querySelector("#letterSelector").style.display = "none";
+        document.querySelector("#numberSelectorA").style.display = "block";
+      }
+
+      function A1_function() {
+        document.querySelector("#numberSelectorA").style.display = "none";
+        document.querySelector("#A1Round1").style.display = "block";
+      }
+
+      function A1R1CorrectFunction() {
+        document.querySelector("#resultA1R1").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultA1R1").textContent = "";
+          document.querySelector("#A1Round1").style.display = "none";
+          document.querySelector("#A1Round2").style.display = "block";
+        }, 3000);
+      }
+
+      function A1R2CorrectFunction() {
+        document.querySelector("#resultA1R2").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultA1R2").textContent = "";
+          document.querySelector("#A1Round2").style.display = "none";
+          document.querySelector("#A1Round3").style.display = "block";
+        }, 3000);
+      }
+
+      function A1R3CorrectFunction() {
+        document.querySelector("#resultA1R3").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultA1R3").textContent = "";
+          document.querySelector("#A1Round3").style.display = "none";
+          document.querySelector("#playGame").style.display = "block";
+          result.textContent =
+            "Congratulations! You have won the game! Click play to play again.";
+        }, 3000);
+      }
+
+      function A2_function() {
+        document.querySelector("#numberSelectorA").style.display = "none";
+        document.querySelector("#A2Round1").style.display = "block";
+      }
+
+      function A2R1CorrectFunction() {
+        document.querySelector("#resultA2R1").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultA2R1").textContent = "";
+          document.querySelector("#A2Round1").style.display = "none";
+          document.querySelector("#A2Round2").style.display = "block";
+        }, 3000);
+      }
+
+      function A2R2CorrectFunction() {
+        document.querySelector("#resultA2R2").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultA2R2").textContent = "";
+          document.querySelector("#A2Round2").style.display = "none";
+          document.querySelector("#A2Round3").style.display = "block";
+        }, 3000);
+      }
+
+      function A2R3CorrectFunction() {
+        document.querySelector("#resultA2R3").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultA2R3").textContent = "";
+          document.querySelector("#A2Round3").style.display = "none";
+          document.querySelector("#playGame").style.display = "block";
+          result.textContent =
+            "Congratulations! You have won the game! Click play to play again.";
+        }, 3000);
+      }
+
+      function A3_function() {
+        document.querySelector("#numberSelectorA").style.display = "none";
+        document.querySelector("#A3Round1").style.display = "block";
+      }
+
+      function A3R1CorrectFunction() {
+        document.querySelector("#resultA3R1").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultA3R1").textContent = "";
+          document.querySelector("#A3Round1").style.display = "none";
+          document.querySelector("#A3Round2").style.display = "block";
+        }, 3000);
+      }
+
+      function A3R2CorrectFunction() {
+        document.querySelector("#resultA3R2").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultA3R2").textContent = "";
+          document.querySelector("#A3Round2").style.display = "none";
+          document.querySelector("#A3Round3").style.display = "block";
+        }, 3000);
+      }
+
+      function A3R3CorrectFunction() {
+        document.querySelector("#resultA3R3").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultA3R3").textContent = "";
+          document.querySelector("#A3Round3").style.display = "none";
+          document.querySelector("#playGame").style.display = "block";
+          result.textContent =
+            "Congratulations! You have won the game! Click play to play again.";
+        }, 3000);
+      }
+
+      function B_function() {
+        document.querySelector("#letterSelector").style.display = "none";
+        document.querySelector("#numberSelectorB").style.display = "block";
+      }
+
+      function B1_function() {
+        document.querySelector("#numberSelectorB").style.display = "none";
+        document.querySelector("#B1Round1").style.display = "block";
+      }
+      function B1R1CorrectFunction() {
+        document.querySelector("#resultB1R1").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultB1R1").textContent = "";
+          document.querySelector("#B1Round1").style.display = "none";
+          document.querySelector("#B1Round2").style.display = "block";
+        }, 3000);
+      }
+
+      function B1R2CorrectFunction() {
+        document.querySelector("#resultB1R2").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultB1R2").textContent = "";
+          document.querySelector("#B1Round2").style.display = "none";
+          document.querySelector("#B1Round3").style.display = "block";
+        }, 3000);
+      }
+
+      function B1R3CorrectFunction() {
+        document.querySelector("#resultB1R3").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultB1R3").textContent = "";
+          document.querySelector("#B1Round3").style.display = "none";
+          document.querySelector("#playGame").style.display = "block";
+          result.textContent =
+            "Congratulations! You have won the game! Click play to play again.";
+        }, 3000);
+      }
+
+      function B2_function() {
+        document.querySelector("#numberSelectorB").style.display = "none";
+        document.querySelector("#B2Round1").style.display = "block";
+      }
+
+      function B2R1CorrectFunction() {
+        document.querySelector("#resultB2R1").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultB2R1").textContent = "";
+          document.querySelector("#B2Round1").style.display = "none";
+          document.querySelector("#B2Round2").style.display = "block";
+        }, 3000);
+      }
+
+      function B2R2CorrectFunction() {
+        document.querySelector("#resultB2R2").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultB2R2").textContent = "";
+          document.querySelector("#B2Round2").style.display = "none";
+          document.querySelector("#B2Round3").style.display = "block";
+        }, 3000);
+      }
+
+      function B2R3CorrectFunction() {
+        document.querySelector("#resultB2R3").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultB2R3").textContent = "";
+          document.querySelector("#B2Round3").style.display = "none";
+          document.querySelector("#playGame").style.display = "block";
+          result.textContent =
+            "Congratulations! You have won the game! Click play to play again.";
+        }, 3000);
+      }
+
+      function B3_function() {
+        document.querySelector("#numberSelectorB").style.display = "none";
+        document.querySelector("#B3Round1").style.display = "block";
+      }
+
+      function B3R1CorrectFunction() {
+        document.querySelector("#resultB3R1").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultB3R1").textContent = "";
+          document.querySelector("#B3Round1").style.display = "none";
+          document.querySelector("#B3Round2").style.display = "block";
+        }, 3000);
+      }
+
+      function B3R2CorrectFunction() {
+        document.querySelector("#resultB3R2").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultB3R2").textContent = "";
+          document.querySelector("#B3Round2").style.display = "none";
+          document.querySelector("#B3Round3").style.display = "block";
+        }, 3000);
+      }
+
+      function B3R3CorrectFunction() {
+        document.querySelector("#resultB3R3").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultB3R3").textContent = "";
+          document.querySelector("#B3Round3").style.display = "none";
+          document.querySelector("#playGame").style.display = "block";
+          result.textContent =
+            "Congratulations! You have won the game! Click play to play again.";
+        }, 3000);
+      }
+
+      function C_function() {
+        document.querySelector("#letterSelector").style.display = "none";
+        document.querySelector("#numberSelectorC").style.display = "block";
+      }
+
+      function C1_function() {
+        document.querySelector("#numberSelectorC").style.display = "none";
+        document.querySelector("#C1Round1").style.display = "block";
+      }
+      function C1R1CorrectFunction() {
+        document.querySelector("#resultC1R1").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultC1R1").textContent = "";
+          document.querySelector("#C1Round1").style.display = "none";
+          document.querySelector("#C1Round2").style.display = "block";
+        }, 3000);
+      }
+
+      function C1R2CorrectFunction() {
+        document.querySelector("#resultC1R2").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultC1R2").textContent = "";
+          document.querySelector("#C1Round2").style.display = "none";
+          document.querySelector("#C1Round3").style.display = "block";
+        }, 3000);
+      }
+
+      function C1R3CorrectFunction() {
+        document.querySelector("#resultC1R3").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultC1R3").textContent = "";
+          document.querySelector("#C1Round3").style.display = "none";
+          document.querySelector("#playGame").style.display = "block";
+          result.textContent =
+            "Congratulations! You have won the game! Click play to play again.";
+        }, 3000);
+      }
+
+      function C2_function() {
+        document.querySelector("#numberSelectorC").style.display = "none";
+        document.querySelector("#C2Round1").style.display = "block";
+      }
+      function C2R1CorrectFunction() {
+        document.querySelector("#resultC2R1").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultC2R1").textContent = "";
+          document.querySelector("#C2Round1").style.display = "none";
+          document.querySelector("#C2Round2").style.display = "block";
+        }, 3000);
+      }
+
+      function C2R2CorrectFunction() {
+        document.querySelector("#resultC2R2").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultC2R2").textContent = "";
+          document.querySelector("#C2Round2").style.display = "none";
+          document.querySelector("#C2Round3").style.display = "block";
+        }, 3000);
+      }
+
+      function C2R3CorrectFunction() {
+        document.querySelector("#resultC2R3").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultC2R3").textContent = "";
+          document.querySelector("#C2Round3").style.display = "none";
+          document.querySelector("#playGame").style.display = "block";
+          result.textContent =
+            "Congratulations! You have won the game! Click play to play again.";
+        }, 3000);
+      }
+
+      function C3_function() {
+        document.querySelector("#numberSelectorC").style.display = "none";
+        document.querySelector("#C3Round1").style.display = "block";
+      }
+      function C3R1CorrectFunction() {
+        document.querySelector("#resultC3R1").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultC3R1").textContent = "";
+          document.querySelector("#C3Round1").style.display = "none";
+          document.querySelector("#C3Round2").style.display = "block";
+        }, 3000);
+      }
+
+      function C3R2CorrectFunction() {
+        document.querySelector("#resultC3R2").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultC3R2").textContent = "";
+          document.querySelector("#C3Round2").style.display = "none";
+          document.querySelector("#C3Round3").style.display = "block";
+        }, 3000);
+      }
+
+      function C3R3CorrectFunction() {
+        document.querySelector("#resultC3R3").textContent = "Correct!";
+        setTimeout(() => {
+          document.querySelector("#resultC3R3").textContent = "";
+          document.querySelector("#C3Round3").style.display = "none";
+          document.querySelector("#playGame").style.display = "block";
+          result.textContent =
+            "Congratulations! You have won the game! Click play to play again.";
+        }, 3000);
+      }
+
+      function wrongFunction() {
+        result.textContent = "Wrong. You have failed!";
+        document.querySelector("#playGame").style.display = "block";
+        document.querySelector("#A1Round1").style.display = "none";
+        document.querySelector("#A1Round2").style.display = "none";
+        document.querySelector("#A1Round3").style.display = "none";
+        document.querySelector("#A2Round1").style.display = "none";
+        document.querySelector("#A2Round2").style.display = "none";
+        document.querySelector("#A2Round3").style.display = "none";
+        document.querySelector("#A3Round1").style.display = "none";
+        document.querySelector("#A3Round2").style.display = "none";
+        document.querySelector("#A3Round3").style.display = "none";
+        document.querySelector("#B1Round1").style.display = "none";
+        document.querySelector("#B1Round2").style.display = "none";
+        document.querySelector("#B1Round3").style.display = "none";
+        document.querySelector("#B2Round1").style.display = "none";
+        document.querySelector("#B2Round2").style.display = "none";
+        document.querySelector("#B2Round3").style.display = "none";
+        document.querySelector("#B3Round1").style.display = "none";
+        document.querySelector("#B3Round2").style.display = "none";
+        document.querySelector("#B3Round3").style.display = "none";
+        document.querySelector("#C1Round1").style.display = "none";
+        document.querySelector("#C1Round2").style.display = "none";
+        document.querySelector("#C1Round3").style.display = "none";
+        document.querySelector("#C2Round1").style.display = "none";
+        document.querySelector("#C2Round2").style.display = "none";
+        document.querySelector("#C2Round3").style.display = "none";
+        document.querySelector("#C3Round1").style.display = "none";
+        document.querySelector("#C3Round2").style.display = "none";
+        document.querySelector("#C3Round3").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
